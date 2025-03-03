@@ -1,7 +1,6 @@
 # NPUA Reinforcement Learning Course Projects
 
 ---
-
 # **Overview**
 This repository includes a collection of projects developed during the Reinforcement Learning (RL) course at the **National Polytechnic University of Armenia (NPUA)**. The projects integrate theoretical knowledge with practical applications, aiming to develop a deep understanding of decision-making systems. The work is based on the latest methodologies in reinforcement learning research.
 
