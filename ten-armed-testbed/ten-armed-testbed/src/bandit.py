@@ -134,13 +134,41 @@ class Bandit:
 
         # region Body
 
+
         # region ε-greedy
 
         # ε-greedy action selection: every once in a while, with small probability ε, select randomly from among all the actions with equal probability, independently of the action-value estimates.
-        if np.random.rand() < self.epsilon:
+        if np.random.random() < self.epsilon:
             return np.random.choice(self.actions)
 
         # endregion ε-greedy
+
+        # region UCB
+        # Check if confidence level is defined (not None)
+        if self.confidence_level is not None:
+
+            # Calculate the UCB estimation for each action
+            UCB_estimation = self.estimated_action_values + self.confidence_level * np.sqrt(np.log(self.time + 1) / (self.action_selection_count + 1e-5))
+
+            # Select the action with the highest UCB estimation.
+            # np.random.choice is used to randomly select one of these actions in case of ties (multiple actions with the same UCB value)
+            action = np.random.choice(np.where(UCB_estimation == np.max(UCB_estimation))[0])
+            return action
+
+        # endregion UCB
+
+        # region GBA
+
+        # Check if Gradient Bandit Algorithm (GBA) is enabled (use_gradient = True)
+        if self.use_gradient:
+            exponential_estimates = np.exp(self.estimated_action_values)
+
+            # Calculate action probabilities by normalizing the exponentiated action values.
+            self.action_probability = exponential_estimates / np.sum(exponential_estimates)
+
+            return np.random.choice(self.actions, p = self.action_probability)
+
+        # endregion GBA
 
         # region Greedy
 
