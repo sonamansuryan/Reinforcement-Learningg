@@ -5,7 +5,7 @@ This project implements and visualizes concepts from **Chapter 3** of *Reinforce
 
 ---
 
-## 📖 Environment Overview
+## Environment Overview
 
 - A rectangular **5x5 gridworld** representing a simple Markov Decision Process (MDP).
 - At each grid cell (state), the agent can take **4 actions**: north, south, east, and west.
@@ -21,7 +21,7 @@ This project implements and visualizes concepts from **Chapter 3** of *Reinforce
 
 ---
 
-## 🎯 Tasks
+## Tasks
 
 ### 1. **Policy Evaluation (Figure 3.2)**
 
@@ -42,7 +42,7 @@ This project implements and visualizes concepts from **Chapter 3** of *Reinforce
 
 ---
 
-## 📊 Outputs
+##  Outputs
 
 - `figure_3_2.png`: Value function under random policy.
 - `figure_3_5.png`: Optimal state-value function.
@@ -50,7 +50,7 @@ This project implements and visualizes concepts from **Chapter 3** of *Reinforce
 
 ---
 
-## 🛠️ How to Run
+##  How to Run
 
 1. Ensure Python dependencies are installed:
 ```bash
@@ -67,7 +67,7 @@ pip install numpy matplotlib
 
 ---
 
-## 📚 References
+##  References
 
 - Sutton, R. S., & Barto, A. G. (2018). *Reinforcement Learning: An Introduction* (2nd ed.)  
   [Download the book (free)](http://incompleteideas.net/book/RLbook2020.pdf)

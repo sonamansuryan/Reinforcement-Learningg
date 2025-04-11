@@ -14,18 +14,18 @@ This project demonstrates **Iterative Policy Evaluation**, **Policy Improvement*
 
 ## Tasks
 
-### ✅ Policy Evaluation
+### Policy Evaluation
 - Estimate the **state-value function** `v_π(s)` for the given random policy using **iterative updates**.
 - Two versions implemented:
   - **In-place** updates: updates are immediately used in subsequent state calculations.
   - **Out-of-place** updates: all updates are stored in a copy and applied simultaneously after each sweep.
 - Convergence is checked by comparing the maximum difference between value estimates across iterations.
 
-### ✅ Policy Improvement
+### Policy Improvement
 - Once `v_π` is estimated, derive a **greedy policy** `π'` that maximizes value with respect to `v_π`.
 - The result illustrates **policy improvement**, showing that `π'` performs better or equally well compared to `π`.
 
-### ✅ Policy Iteration (Discussion)
+###  Policy Iteration (Discussion)
 - In this specific Gridworld, applying policy improvement on the random policy results in an **optimal policy** in just one iteration.
 
 ## Outputs
