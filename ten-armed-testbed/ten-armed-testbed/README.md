@@ -121,11 +121,9 @@ Sweeps over different parameter values (powers of 2) for:
 
 ## Reference
 
-Sutton, R. S., & Barto, A. G. (2018).
-**Reinforcement Learning: An Introduction (2nd Ed.)**
+* Sutton, R. S., & Barto, A. G. (2018). *Reinforcement Learning: An Introduction (2nd Edition)*.
 
-[📘 Free PDF](http://incompleteideas.net/book/the-book.html)
-
+  * [Chapter 2 – Multi-armed Bandits (Ten-armed testbed)](http://incompleteideas.net/book/RLbook2020.pdf#page=29)
 ---
 
 ##  Educational Objective

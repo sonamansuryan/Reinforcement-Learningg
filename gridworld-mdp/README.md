@@ -88,12 +88,10 @@ Arrows represent the **optimal actions** from each state. In some cells, multipl
 
 ---
 
-## Reference
+##  Reference
 
-Sutton, R. S., & Barto, A. G. (2018).
-**Reinforcement Learning: An Introduction (2nd Ed.)**
-
-[📘 Free PDF](http://incompleteideas.net/book/the-book.html)
+* Sutton, R. S., & Barto, A. G. (2018). *Reinforcement Learning: An Introduction (2nd Edition)*.
+  * [Chapter 4 – Gridworld as a Markov Decision Process (Section 4.1)](http://incompleteideas.net/book/RLbook2020.pdf#page=80)
 
 ---
 

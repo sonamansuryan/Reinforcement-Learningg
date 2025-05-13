@@ -324,24 +324,26 @@ def monte_carlo_on_policy(episodes):
     # region Body
 
     # States with usable ace (i.e. player holds an ace that he could count as 11 without going bust)
-    states_usable_ace = np.zeros((10, 10))
+    states_usable_ace = np.zeros((10,10))
 
     # Initialize counts with 1s in order to avoid division by 0
-    states_usable_ace_count = np.ones((10, 10))
+    states_usable_ace_count = np.ones((10,10))
 
     # States with no usable ace
-    states_no_usable_ace = np.zeros((10, 10))
+    states_no_usable_ace = np.zeros((10,10))
 
     # Initialize counts with 1s in order to avoid division by 0
-    states_no_usable_ace_count = np.ones((10, 10))
+    states_no_usable_ace_count = np.ones((10,10))
 
     # For every episode
-    for _ in range(episodes):
+    for _ in tqdm(range(episodes)):
+
         # get reward and player's trajectory
         _, reward, player_trajectory = play(target_policy_player)
 
         # for every triple in player's trajectory
-        for (usable_ace, player_sum, dealer_card) , _ in player_trajectory:
+        for (usable_ace, player_sum, dealer_card), _ in player_trajectory:
+
             # adjust the sum of player's cards (10 values: 12–21 → 0–9)
             player_sum -= 12
 
@@ -351,16 +353,19 @@ def monte_carlo_on_policy(episodes):
             # check if player has a usable ace
             if usable_ace:
                 states_usable_ace[player_sum, dealer_card] += reward
+                states_usable_ace_count[player_sum, dealer_card] += 1
             else:
                 states_no_usable_ace[player_sum, dealer_card] += reward
                 states_no_usable_ace_count[player_sum, dealer_card] += 1
 
     # Calculate average of states with usable ace
-    average_usable_ace = states_usable_ace / states_no_usable_ace_count
+    average_usable_ace = states_usable_ace / states_usable_ace_count
 
     # Calculate average of states with no usable ace
     average_no_usable_ace = states_no_usable_ace / states_no_usable_ace_count
+
     return average_usable_ace, average_no_usable_ace
+
     # endregion Body
 
 def monte_carlo_es(episodes):
@@ -375,10 +380,10 @@ def monte_carlo_es(episodes):
     # region Body
 
     # Create a 4-dimensional tensor for state-action values with dimensions = (player_sum, dealer_card, usable_ace, action)
-    state_action_values = np.zeros((10, 10, 2, 2))
+    state_action_values = np.zeros((10,10,2,2))
 
     # Initialize counts with 1s in order to avoid division by 0
-    state_action_pair_count = np.ones((10, 10, 2, 2))
+    state_action_pair_count = np.ones((10,10,2,2))
 
     # region Local Functions
 
@@ -416,7 +421,11 @@ def monte_carlo_es(episodes):
     # For every episode
     for episode in tqdm(range(episodes)):
         # use a randomly initialized state
-        initial_state = [bool(np.random.choice([0, 1])), np.random.choice(range(12, 22)), np.random.choice(range(1, 11))]
+        initial_state = [
+            bool(np.random.choice([0,1])),
+            np.random.choice(range(12,22)),
+            np.random.choice(range(1, 11)),
+        ]
 
         # use a randomly initialized action
         initial_action = np.random.choice(actions)
@@ -430,8 +439,10 @@ def monte_carlo_es(episodes):
         # create an empty set for 1st visits to state-action pairs
         first_visits = set()
 
+
         # for every quartet in player's trajectory
-        for (usable_ace, player_sum, dealer_card) , action in player_trajectory:
+        for(usable_ace, player_sum, dealer_card), action in player_trajectory:
+
             # convert usable ace from bool to int
             usable_ace = int(usable_ace)
 
@@ -445,7 +456,7 @@ def monte_carlo_es(episodes):
             state_action = (usable_ace, player_sum, dealer_card, action)
 
             # if the state-action pair has been visited before, skip it
-            if state_action  in first_visits:
+            if state_action in first_visits:
                 continue
 
             # else, this is the 1st visit to that state-action pair
@@ -455,8 +466,7 @@ def monte_carlo_es(episodes):
             state_action_values[player_sum, dealer_card, usable_ace, action] += reward
             state_action_pair_count[player_sum, dealer_card, usable_ace, action] += 1
 
-    return state_action_values / state_action_pair_count
-
+    return state_action_values
 
     # endregion Body
 
@@ -471,7 +481,43 @@ def monte_carlo_off_policy(episodes):
 
     # region Body
 
+    initial_state = [True, 13, 2]
 
+    importance_sampling_ratios = []
+
+    returns = []
+
+    for i in range(episodes):
+        _, reward, player_trajectory = play(behavior_off_policy_player, initial_state = initial_state)
+
+        numerator = 1.0
+        denominator = 1.0
+
+        for (usable_ace, player_sum, dealer_card), action in player_trajectory:
+            if action == target_policy_player(usable_ace, player_sum, dealer_card):
+                denominator *= 0.5
+            else:
+                numerator = 0.0
+                break
+
+        importance_sampling_ratios.append(numerator / denominator)
+        returns.append(reward)
+
+    importance_sampling_ratios = np.asarray(importance_sampling_ratios)
+    returns = np.asarray(returns)
+
+    weighted_returns = importance_sampling_ratios * returns
+
+    weighted_returns = np.add.accumulate(weighted_returns)
+
+    importance_sampling_ratios = np.add.accumulate(importance_sampling_ratios)
+
+    ordinary_estimates = weighted_returns / np.arange(1, episodes + 1)
+
+    with np.errstate(divide='ignore', invalid='ignore'):
+        weighted_estimates = np.where(importance_sampling_ratios != 0, weighted_returns / importance_sampling_ratios, 0 )
+
+    return ordinary_estimates, weighted_estimates
 
     # endregion Body
 

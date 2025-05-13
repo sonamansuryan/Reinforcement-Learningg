@@ -34,9 +34,9 @@ The simulation involves:
 * **Policy Improvement**: Updates the policy based on the computed value function.
 * **Policy Iteration**: Computes the optimal policy in a few iterations.
 
-### Figures & Their Meanings
+## Figures & Their Meanings
 
-#### Figure 4.1 —  In-Place Policy Evaluation
+### Figure 4.1 —  In-Place Policy Evaluation
 
 ![figure_4_1_in_place.png](gridworld-dp/generated_images/figure_4_1_in_place.png)
 
@@ -46,7 +46,7 @@ Purpose: This demonstrates how iterative policy evaluation converges to the true
 
 
 
-#### Figure 4.2 — Out-of-Place Policy Evaluation
+### Figure 4.2 — Out-of-Place Policy Evaluation
 
 ![figure_4_1_out_place.png](gridworld-dp/generated_images/figure_4_1_out_place.png) 
 
@@ -68,10 +68,11 @@ Purpose: To illustrate how policy iteration can efficiently converge to the opti
 
 ## Reference
 
-Sutton, R. S., & Barto, A. G. (2018).
-**Reinforcement Learning: An Introduction (2nd Ed.)**
 
-[📘 Free PDF](http://incompleteideas.net/book/the-book.html)
+
+* Sutton, R. S., & Barto, A. G. (2018). *Reinforcement Learning: An Introduction (2nd Edition)*.
+  * [Chapter 4 – Gridworld Policy Evaluation & Improvement via Dynamic Programming (Section 4.2)](http://incompleteideas.net/book/RLbook2020.pdf#page=85)
+ 
 
 ---
 

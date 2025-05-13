@@ -40,9 +40,9 @@ The problem is solved via **value iteration** to find the optimal value function
 
 ## Figures with Interpretations
 
-<img src="gambler-problem/gambler-problem/generated_images/figure_4_3.png" width="500"/>
+### **Figure 4.3 — Solution to the Gambler’s Problem for ph = 0.4**
 
-**Figure 4.3 — Solution to the Gambler’s Problem for ph = 0.4**
+<img src="gambler-problem/gambler-problem/generated_images/figure_4_3.png" width="500"/>
 
 * **Top Plot (Value Function)**:
 
@@ -59,7 +59,8 @@ The problem is solved via **value iteration** to find the optimal value function
 
 ## Reference
 
-* Sutton, R. S., & Barto, A. G. (2018). *Reinforcement Learning: An Introduction* (2nd ed.), Example 4.3.
+* Sutton, R. S., & Barto, A. G. (2018). *Reinforcement Learning: An Introduction (2nd Edition)*.
+  * [Chapter 4 – Gambler's Problem (Section 4.3)](http://incompleteideas.net/book/RLbook2020.pdf#page=89)
 
 ---
 
