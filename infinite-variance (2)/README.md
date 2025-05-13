@@ -1,7 +1,3 @@
-Here's the `README.md` structure for the **Infinite Variance** example with appropriate sections, images, and explanations, similar to the **Gridworld** example.
-
----
-
 # Infinite Variance in Off-Policy Learning
 
 This repository implements an example from **Chapter 5** of *Reinforcement Learning: An Introduction* by Richard S. Sutton and Andrew G. Barto. It demonstrates the issues that arise with **ordinary importance sampling** when dealing with **infinite variance** in off-policy learning. The experiment compares **ordinary importance sampling** with **weighted importance sampling**, showcasing the divergence in their performance.
