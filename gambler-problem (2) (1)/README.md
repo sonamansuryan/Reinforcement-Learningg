@@ -1,45 +1,72 @@
-# Gambler's Problem – Value Iteration
+# Gambler’s Problem — Value Iteration
 
-This project provides an implementation of the **Gambler’s Problem**, as described in Sutton and Barto's *Reinforcement Learning: An Introduction (2nd Edition)*, Chapter 4. It uses **value iteration** to determine the **optimal policy** and **state-value function** for the gambler, where the objective is to reach a goal of 100 dollars through bets on a biased coin flip.
+## Background
 
-## Problem Description
+This notebook implements the **Gambler’s Problem** as introduced in Sutton & Barto's *Reinforcement Learning: An Introduction* (Example 4.3). In this episodic, undiscounted setting:
 
-- The gambler bets on a coin flip with a known probability of heads, `p_h`.
-- The game ends either when the gambler’s capital reaches $100 (win) or drops to $0 (loss).
-- At each step:
-  - The gambler chooses a stake (an integer amount of current capital).
-  - If heads: he gains that amount; if tails: he loses it.
-- The goal is to maximize the probability of reaching $100.
+* A gambler bets on a biased coin flip (with head probability *ph*).
+* The goal is to reach 100 dollars from an initial capital using optimal betting strategies.
+* The state space S = {1, 2, ..., 99} represents capital.
+* The action space is the amount staked on each bet: a ∈ {0, 1, ..., min(s, 100 − s)}.
+* Reward is +1 for reaching 100, and 0 otherwise.
 
-## Markov Decision Process (MDP) Formulation
+The problem is solved via **value iteration** to find the optimal value function and corresponding optimal policy.
 
-- **States**: Capital levels from `1` to `99` (0 and 100 are terminal).
-- **Actions**: Stakes from `1` to `min(state, 100 - state)`.
-- **Reward**: `+1` on reaching 100, `0` otherwise.
-- **Transition probabilities**: Determined by `p_h`.
+---
 
-## Method: Value Iteration
+## Structure
 
-- Iteratively update state-values until they converge below a threshold (`θ = 1e-9`).
-- At each sweep, update each state's value by selecting the stake (action) that maximizes expected return.
-- Extract the policy corresponding to the optimal value function.
+* **MDP Setup**: States, actions, transition probabilities, and rewards are defined for a biased coin (ph = 0.4).
+* **Value Iteration Loop**: Iteratively updates the value function based on Bellman's optimality equation.
+* **Policy Extraction**: At each step, the best action (stake) is selected greedily based on expected return.
+* **Convergence**: Iteration halts when the value function changes below a threshold.
 
-## Output
+---
 
-The program produces and saves a plot (`figure_4_3.png`) showing:
+## Simulation Overview
 
-- **Top Plot**: Value function over successive sweeps of value iteration.
-- **Bottom Plot**: Final optimal policy — stake vs capital.
+* Initialization:
 
-Example visualization is inspired by *Figure 4.3* from Sutton and Barto’s textbook.
+  * Terminal state value set to 1 at goal (100 dollars).
+  * All other values initialized to 0.
+* Loop continues until value estimates converge.
+* At each iteration:
 
-## How to Run
+  * For every state *s*, evaluate all valid actions *a*.
+  * Compute the expected value based on outcomes (win or lose).
+  * Update V(s) and record policy π(s).
 
-Ensure you have the required packages installed:
-```bash
-pip install matplotlib numpy
-```
+---
 
-Then run the script with a Python environment supporting Jupyter-style cells or refactor into a `.py` script.
+## Figures with Interpretations
+
+![img.png](img.png)
+
+**Figure 4.3 — Solution to the Gambler’s Problem for ph = 0.4**
+
+* **Top Plot (Value Function)**:
+
+  * Shows how the value estimates evolve over successive sweeps.
+  * Converges to the optimal value function *v\**.
+
+* **Bottom Plot (Final Policy)**:
+
+  * Displays the final optimal stake (action) for each capital level.
+  * Indicates that optimal strategies may involve **aggressive** betting, especially near 100.
+  * Multiple optimal policies may exist, especially near the goal, due to tied argmax values.
+
+---
+
+## Reference
+
+* Sutton, R. S., & Barto, A. G. (2018). *Reinforcement Learning: An Introduction* (2nd ed.), Example 4.3.
+
+---
+
+## Educational Objective
+
+* Illustrate the use of **value iteration** in an episodic, finite MDP setting.
+* Highlight how optimal policies can emerge from **expected return maximization**.
+* Provide intuition on how **risk vs. reward** plays out in stochastic environments.
 
 

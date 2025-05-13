@@ -48,7 +48,7 @@ Purpose: This demonstrates how iterative policy evaluation converges to the true
 
 #### Figure 4.2 — Out-of-Place Policy Evaluation
 
-![figure_4_1_out_place.png](gridworld-dp/generated_images/figure_4_1_out_place.png)
+![figure_4_1_out_place.png](gridworld-dp/generated_images/figure_4_1_out_place.png) 
 
 This figure illustrates the value function convergence for an out-of-place computation method, which computes the state values without modifying the existing value function during the process. The sequence of approximations of the value function is shown on the left for a random policy, while the corresponding greedy policies are shown on the right.
 
