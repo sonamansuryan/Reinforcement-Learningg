@@ -106,7 +106,7 @@ Compares **gradient bandit algorithms** with:
 
 ### Figure 2.6 — Parameter Comparison of All Methods
 
-<img src="./generated_images/figure_2_6.png" width="500"/>
+![img.png](img.png)
 
 Sweeps over different parameter values (powers of 2) for:
 
