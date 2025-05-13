@@ -4,8 +4,10 @@ class Bandit:
     # region Constructor
 
     def __init__(self, arms_number: int = 10, use_sample_averages: bool = False, epsilon=0., initial_action_value_estimates=0., confidence_level=None,
-                 use_gradient: bool = False, step_size=0.1, use_gradient_baseline: bool = False, true_expected_reward=0.):
+                 use_gradient: bool = False, step_size=0.1, use_gradient_baseline: bool = False, true_expected_reward=0., UCB_param=None):
         # region Summary
+
+
         """
         k-armed Bandit.
         :param arms_number: (denoted as k) number of bandit's arms
