@@ -96,7 +96,7 @@ The objective is to evaluate and improve policies using **Monte Carlo Prediction
 
 ### **Figure 5.3 — Off-policy Prediction via Importance Sampling**
 
-![figure_5_3.png](blackjack/generated_images/figure_5_3.png)
+![figure_5_3.png![figure_5_3.png](blackjack/generated_images/figure_5_3.png)](blackjack/generated_images/figure_5_3.png)
 
 
 * Mean squared error (MSE) vs number of episodes (log scale).
