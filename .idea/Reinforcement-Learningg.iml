@@ -2,14 +2,17 @@
 <module type="PYTHON_MODULE" version="4">
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
-      <sourceFolder url="file://$MODULE_DIR$/gridworld-dp (1)/gridworld-dp/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/gridworld-mdp/gridworld-mdp/src" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/blackjack (2)" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/blackjack (2)/blackjack" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/blackjack (2)/blackjack/notebooks" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/blackjack (2)/blackjack/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/ten-armed-testbed/ten-armed-testbed/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/tic-tac-toe/tic-tac-toe/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/ten-armed-testbed/ten-armed-testbed/notebooks" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/gridworld-dp/gridworld-dp/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/infinite-variance (2)/infinite-variance" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/infinite-variance (2)/infinite-variance/infinite-variance" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/infinite-variance (2)/infinite-variance/infinite-variance/notebooks" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/infinite-variance (2)/infinite-variance/infinite-variance/src" isTestSource="false" />
     </content>
     <orderEntry type="jdk" jdkName="Python 3.12" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
