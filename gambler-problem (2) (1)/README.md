@@ -40,14 +40,14 @@ The problem is solved via **value iteration** to find the optimal value function
 
 ## Figures with Interpretations
 
-![figure_4_3.png](gambler-problem/gambler-problem/generated_images/figure_4_3.png)
+![figure_4_3.png](gambler-problem/gambler-problem/generated_images/figure_4_3.png){: width="500px"}
 
 **Figure 4.3 — Solution to the Gambler’s Problem for ph = 0.4**
 
 * **Top Plot (Value Function)**:
 
   * Shows how the value estimates evolve over successive sweeps.
-  * Converges to the optimal value function *v\**.
+  * Converges to the optimal value function v\*.
 
 * **Bottom Plot (Final Policy)**:
 
