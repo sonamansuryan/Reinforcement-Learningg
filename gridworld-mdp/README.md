@@ -56,7 +56,7 @@ We simulate the gridworld with the following setup:
 
 ### Figure 3.2 — Value Function under a Random Policy
 
-![figure_3_2.png](gridworld-mdp/generated_images/figure_3_2.png)
+![figure_3_2.png](generated_images/figure_3_2.png)
 
 This figure shows the **state-value function** $v_{\pi}$ under a uniform random policy, with γ = 0.9.
 
@@ -70,7 +70,7 @@ This figure shows the **state-value function** $v_{\pi}$ under a uniform random 
 
 ### Figure 3.5 (middle) — Optimal State-Value Function
 
-![figure_3_5.png](gridworld-mdp/generated_images/figure_3_5.png)
+![figure_3_5.png](generated_images/figure_3_5.png)
 
 This value function $v_*$ is computed by applying **Bellman optimality updates** until convergence.
 
@@ -80,7 +80,7 @@ This value function $v_*$ is computed by applying **Bellman optimality updates**
 
 ### Figure 3.5 (right) — Optimal Policy Derived from $v_*$
 
-![figure_3_2_policy.png](gridworld-mdp/generated_images/figure_3_5_policy.png)
+![figure_3_5_policy.png](generated_images/figure_3_5_policy.png)
 
 Arrows represent the **optimal actions** from each state. In some cells, multiple actions are equally optimal.
 
