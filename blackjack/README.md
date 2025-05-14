@@ -74,7 +74,7 @@ The objective is to evaluate and improve policies using **Monte Carlo Prediction
 
 ### **Figure 5.1 — Monte Carlo Prediction Results**
 
-![figure_5_1.png](blackjack/generated_images/figure_5_1.png)
+![figure_5_1.png](generated_images/figure_5_1.png)
 
 
 * Shows estimated **state-value function** for the fixed policy.
@@ -85,7 +85,7 @@ The objective is to evaluate and improve policies using **Monte Carlo Prediction
 
 ### **Figure 5.2 — Monte Carlo Control with Exploring Starts**
 
-![figure_5_2.png](blackjack/generated_images/figure_5_2.png)
+![figure_5_2.png](generated_images/figure_5_2.png)
 
 * Top row: **Optimal policy** with and without usable ace.
 * Bottom row: Corresponding **state-value function**.
@@ -96,7 +96,7 @@ The objective is to evaluate and improve policies using **Monte Carlo Prediction
 
 ### **Figure 5.3 — Off-policy Prediction via Importance Sampling**
 
-![figure_5_3.png![figure_5_3.png](blackjack/generated_images/figure_5_3.png)](blackjack/generated_images/figure_5_3.png)
+![figure_5_3.png![figure_5_3.png](generated_images/figure_5_3.png)](generated_images/figure_5_3.png)
 
 
 * Mean squared error (MSE) vs number of episodes (log scale).

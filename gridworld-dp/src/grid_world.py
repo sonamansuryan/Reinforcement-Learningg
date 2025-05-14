@@ -116,19 +116,19 @@ def compute_state_value(in_place=True, discount=1.0, threshold=1e-4):
     # region Body
 
     # New values of state-value function table (denoted as 𝑣_𝑘+1 (𝑠))
-    new_states_values = np.zeros((grid_size, grid_size))
-
+    new_state_values = np.zeros((grid_size,grid_size))
 
     # Initialize number of iterations
-    iteration = 0
+    iterations = 0
 
     # Iterate until value convergence
     while True:
         # Compute state-values for in-place and out-of-place cases
         if in_place:
-            state_values = new_states_values
+            state_values = new_state_values
         else:
-            state_values = new_states_values.copy()
+            state_values = new_state_values.copy()
+
         # Old values of state-value function table (denoted as 𝑣_𝑘 (𝑠))
         old_state_values = state_values.copy()
 
@@ -136,34 +136,32 @@ def compute_state_value(in_place=True, discount=1.0, threshold=1e-4):
         for i in range(grid_size):
             for j in range(grid_size):
 
-
                 # New state-value
                 value = 0
 
                 # For every action
                 for action in actions:
                     # get the current state
-                    state = [i, j]
+                    state = [i,j]
 
                     # get the next state and reward
                     next_state, reward = step(state, action)
 
                     # compute Bellman equation for 𝑣_𝜋
-                    value += (action_probability * (reward + discount * state_values[next_state[0], next_state[1]]))
+                    value += action_probability * (reward + discount * state_values[next_state[0],next_state[1]])
 
                 # Assign the computed value as new state-value
-                new_states_values[i, j ] = value
+                new_state_values[i,j] = value
 
         # Check value convergence
-        max_delta_value = abs(old_state_values - new_states_values).max()
+        max_delta_value = abs(old_state_values - new_state_values).max()
         if max_delta_value < threshold:
             break
 
         # Increment number of iterations
-        iteration += 1
+        iterations += 1
 
-    return new_states_values, iteration
-
+    return new_state_values,iterations
 
 
     # endregion Body

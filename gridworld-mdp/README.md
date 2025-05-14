@@ -100,4 +100,3 @@ Arrows represent the **optimal actions** from each state. In some cells, multipl
 This project is meant for **educational use**, helping students build **intuition about value functions**, **Bellman equations**, and the role of **policies** in MDPs. By working with a simple yet expressive grid environment, the concepts of **reward propagation**, **state evaluation**, and **policy derivation** are made visual and interpretable.
 
 
-

@@ -42,7 +42,7 @@ The problem is solved via **value iteration** to find the optimal value function
 
 ### **Figure 4.3 — Solution to the Gambler’s Problem for ph = 0.4**
 
-<img src="gambler-problem/gambler-problem/generated_images/figure_4_3.png" width="500"/>
+<img src="generated_images/figure_4_3.png" width="500"/>
 
 * **Top Plot (Value Function)**:
 
