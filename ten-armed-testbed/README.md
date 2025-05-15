@@ -1,4 +1,3 @@
-
 # 10-Armed Bandit 
 This repository contains an implementation of the **10-armed bandit testbed**, inspired by Chapter 2 of the classic book *Reinforcement Learning: An Introduction* by Richard S. Sutton and Andrew G. Barto. The simulation compares various action-selection strategies in multi-armed bandit problems through empirical analysis and visualization.
 
@@ -40,7 +39,7 @@ In this simulation:
 
 ###  Figure 2.1 — Reward Distributions
 
-<img src="./generated_images/figure_2_1.png" width="500"/>
+<img src="generated_images/figure_2_1.png" width="500"/>
 
 This violin plot shows the **true reward distributions** of the 10 actions (arms).
 Each action's reward is sampled from a normal distribution with its own mean, visualizing the stochastic nature of each arm.
@@ -50,7 +49,7 @@ Each action's reward is sampled from a normal distribution with its own mean, vi
 
 ### Figure 2.2 — Greedy vs ε-Greedy
 
-<img src="./generated_images/figure_2_2.png" width="500"/>
+<img src="generated_images/figure_2_2.png" width="500"/>
 
 This figure compares three ε-greedy strategies:
 
@@ -67,7 +66,7 @@ This figure compares three ε-greedy strategies:
 
 ### Figure 2.3 — Optimistic Initial Values
 
-<img src="./generated_images/figure_2_3.png" width="500"/>
+<img src="generated_images/figure_2_3.png" width="500"/>
 
 Compares two agents:
 
@@ -80,7 +79,7 @@ Compares two agents:
 
 ### Figure 2.4 — UCB vs ε-Greedy
 
-<img src="./generated_images/figure_2_4.png" width="500"/>
+<img src="generated_images/figure_2_4.png" width="500"/>
 
 Compares:
 
@@ -93,7 +92,7 @@ Compares:
 
 ### Figure 2.5 — Gradient Bandit Algorithms
 
-<img src="./generated_images/figure_2.5.png" width="500"/>
+<img src="generated_images/figure_2.5.png" width="500"/>
 
 Compares **gradient bandit algorithms** with:
 
@@ -106,7 +105,7 @@ Compares **gradient bandit algorithms** with:
 
 ### Figure 2.6 — Parameter Comparison of All Methods
 
-<img src="./generated_images/figure_2_6.png" width="400"/>
+<img src="generated_images/figure_2_6.png" width="400"/>
 
 Sweeps over different parameter values (powers of 2) for:
 
