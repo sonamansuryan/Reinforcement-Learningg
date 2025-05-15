@@ -1,82 +1,61 @@
-# Tic-Tac-Toe Reinforcement Learning Project
+# Tic-Tac-Toe – Reinforcement Learning Project
 
-
-##  Overview
-
-This project is a practical implementation of Reinforcement Learning applied to the classic Tic-Tac-Toe game. The system builds an intelligent agent that learns optimal gameplay through experience and policy refinement.
-
-The AI learns from self-play and stores optimal decisions in serialized policy files for future use.
+This repository contains a reinforcement learning implementation of the classic **Tic-Tac-Toe** game. Inspired by early RL research and educational demonstrations, it explores how an agent can **learn optimal gameplay through self-play and value-based methods**.
 
 ---
 
-##  Key Components
+## Background
 
-- **Learning Agent (`player.py`)**  
-  Implements reinforcement learning (value-based) to improve strategies over time. Learns via self-play and stores policies in `.bin` files.
-  
-- **Game Logic & State Tracker (`state.py`)**  
-  Manages board configuration, transitions, and state encoding.
-  
-- **Judge (`judge.py`)**  
-  Checks for win/draw conditions and evaluates game outcomes.
-  
-- **Execution Environment (`tic_tac_toe.py`)**  
-  The main script to run training, play, or evaluation. Acts as a controller.
+**Tic-Tac-Toe** is a simple turn-based zero-sum game that offers a small but rich environment to understand **value estimation**, **policy learning**, and **self-play training**. Despite its simplicity, it allows us to explore key reinforcement learning ideas, such as:
 
-- **Policies**  
-  Pretrained policies (`policy_first.bin`, `policy_second.bin`) store learned value functions for both players.
+* Learning from reward signals
+* State value approximation
+* Policy improvement over time
+* Strategy convergence through experience
+
+This project demonstrates a **tabular value function approach**, where state values are stored explicitly and updated iteratively based on game outcomes.
 
 ---
 
-##  Operating Modes
+## Structure
 
-### ➤ Training Mode
-- The AI trains via repeated self-play.
-- Value functions are updated using rewards from game outcomes.
-- Policies are saved for later inference/play.
-
-### ➤ Play Mode
-- A human can play against a trained agent.
-- Alternatively, two AI agents can play against each other.
-- Real-time decision-making is done using stored policy files.
+* `player.py`: Implements both AI and human agents. The AI uses a reinforcement learning approach to update state values through self-play and stores learned policies in `.bin` files.
+* `state.py`: Handles the board configuration, game state representation, and state hashing for policy lookups.
+* `judge.py`: Evaluates game termination conditions—win, lose, or draw.
+* `tic_tac_toe.py`: Main script that runs training or gameplay sessions. Entry point of the project.
+* `policy_first.bin` and `policy_second.bin`: Serialized policy files (value tables) for Player 1 and Player 2 respectively.
 
 ---
 
-## How to Use
+## Simulation Overview
 
-### Requirements
+The learning agent plays thousands of games against itself, gradually improving its strategy:
 
-- Python 3.10 +
-- No external dependencies required (only standard library)
+* **State values** are initialized arbitrarily (often zero) and are updated based on reward signals.
+* **Self-play** allows exploration of many board configurations.
+* After training, the AI uses the learned value tables (policies) to play optimally or near-optimally.
+* Policies are saved to `.bin` files for reuse during play.
 
-### ▶ Run the Game
+Two operating modes:
 
-```bash
-cd tic-tac-toe/src
-python tic_tac_toe.py
-````
-
-Follow the on-screen instructions to choose training or play mode.
+* **Training Mode**: Run thousands of self-play games to learn value functions.
+* **Play Mode**: A human can challenge the trained AI, or two AI agents can compete.
 
 ---
 
-##  File Structure
+## Reference
 
-```
-tic-tac-toe/
-├── src/
-│   ├── tic_tac_toe.py         # Main script
-│   ├── state.py               # Game state logic
-│   ├── player.py              # AI and human players
-│   ├── judge.py               # Outcome evaluation
-│   ├── policy_first.bin       # Policy for player 1 (AI)
-│   ├── policy_second.bin      # Policy for player 2 (AI)
-```
+* Sutton, R. S., & Barto, A. G. (2018). *Reinforcement Learning: An Introduction (2nd Edition)*.
+  * [Chapter 1 – Introduction](http://incompleteideas.net/book/RLbook2020.pdf#page=15)
 
 ---
 
-## Notes
+## Educational Objective
 
-* The agent uses a table-based value function approach, storing the estimated value for each state.
-* Policy files are stored as binary data using Python's `pickle` module.
-* Retraining will overwrite existing policies unless backed up.
+This project is designed for **educational purposes** and aims to teach:
+
+* How value-based reinforcement learning works in discrete environments
+* The importance of policy evaluation and improvement
+* The effectiveness of self-play in learning strategic behavior
+
+By training an agent to master Tic-Tac-Toe, learners gain hands-on experience with RL fundamentals in a controlled, visualizable environment.
