@@ -70,8 +70,8 @@ Purpose: To illustrate how policy iteration can efficiently converge to the opti
 
 
 
-* Sutton, R. S., & Barto, A. G. (2018). *Reinforcement Learning: An Introduction (2nd Edition)*.
-  * [Chapter 4 – Gridworld Policy Evaluation & Improvement via Dynamic Programming (Section 4.2)](http://incompleteideas.net/book/RLbook2020.pdf#page=85)
+* Sutton, R. S., & Barto, A. G. (2018). *Reinforcement Learning: An Introduction (2nd ed.)*.
+  * [Chapter 4 – Gridworld Policy Evaluation & Improvement via Dynamic Programming ](http://incompleteideas.net/book/RLbook2020.pdf#page=85) (see page 77)
  
 
 ---

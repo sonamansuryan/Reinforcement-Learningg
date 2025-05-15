@@ -77,8 +77,8 @@ This plot shows the RMSE of value estimates from the true values over 100 episod
 
 ## Reference
 
-* Sutton, R. S., & Barto, A. G. (2018). *Reinforcement Learning: An Introduction (2nd Edition)*
-  * [Chapter 6 – Temporal-Difference Learning (Example 6.2)](http://incompleteideas.net/book/RLbook2020.pdf#page=137)
+* Sutton, R. S., & Barto, A. G. (2018). *Reinforcement Learning: An Introduction (2nd ed.)*
+  * [Chapter 6 – Temporal-Difference Learning](http://incompleteideas.net/book/RLbook2020.pdf#page=137) (see page 124)
 
 ---
 

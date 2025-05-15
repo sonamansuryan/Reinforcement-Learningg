@@ -108,7 +108,7 @@ The objective is to evaluate and improve policies using **Monte Carlo Prediction
 ## Reference
 
 * Sutton, R. S., & Barto, A. G. (2018). *Reinforcement Learning: An Introduction* (2nd ed.), 
-  * Chapter 5 – [Monte Carlo Methods (Blackjack)](http://incompleteideas.net/book/RLbook2020.pdf#page=109)
+  * [Chapter 5 – Monte Carlo Methods (Blackjack)](http://incompleteideas.net/book/RLbook2020.pdf#page=109) (see page 93)
 
 ---
 

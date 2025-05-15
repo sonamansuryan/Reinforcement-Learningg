@@ -58,9 +58,9 @@ This plot shows the estimates of value using **ordinary importance sampling** ov
 
 ## Reference
 
-* Sutton, R. S., & Barto, A. G. (2018). *Reinforcement Learning: An Introduction (2nd Edition)*.
+* Sutton, R. S., & Barto, A. G. (2018). *Reinforcement Learning: An Introduction (2nd ed.)*.
 
-  * [Chapter 5 – Monte Carlo Methods](http://incompleteideas.net/book/RLbook2020.pdf#page=97)
+  * [Chapter 5 – Monte Carlo Methods](http://incompleteideas.net/book/RLbook2020.pdf#page=97) (see page 103)
 
 ---
 

@@ -59,8 +59,8 @@ The problem is solved via **value iteration** to find the optimal value function
 
 ## Reference
 
-* Sutton, R. S., & Barto, A. G. (2018). *Reinforcement Learning: An Introduction (2nd Edition)*.
-  * [Chapter 4 – Gambler's Problem (Section 4.3)](http://incompleteideas.net/book/RLbook2020.pdf#page=89)
+* Sutton, R. S., & Barto, A. G. (2018). *Reinforcement Learning: An Introduction (2nd ed.)*.
+  * [Chapter 4 – Gambler's Problem](http://incompleteideas.net/book/RLbook2020.pdf#page=89) (see page 84)
 
 ---
 
