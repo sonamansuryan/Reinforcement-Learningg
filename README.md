@@ -1,57 +1,86 @@
-## NPUA Reinforcement Learning Course Projects
+# NPUA Reinforcement Learning Course Projects
 
-### Overview  
+## Overview  
 This repository includes a collection of projects developed during the Reinforcement Learning (RL) course at the National Polytechnic University of Armenia (NPUA). The projects integrate theoretical knowledge with practical applications, aiming to develop a deep understanding of decision-making systems. The work is based on the latest methodologies in reinforcement learning research.
 
 ---
 
-### Key Projects Overview
-
-#### ✅ Project 1: Tic-Tac-Toe Game  
-**Goal:** Implement a classic Tic-Tac-Toe environment and train an RL agent to play optimally through self-play.  
-**Features:**  
-- Tabular value function learning  
-- Training through episode simulations  
-- Play against the trained agent
+## Projects
 
 ---
 
-#### ✅ Project 2: Multi-Armed Bandit Problem  
-**Objective:** Explore the exploration-exploitation dilemma through simulation of bandit algorithms.  
-**Strategies Implemented:**  
-- ε-greedy  
-- Upper Confidence Bound (UCB)  
-- Gradient Bandits  
-**Analysis:**  
-- Comparison between optimistic and realistic initial values  
-- Tracking average rewards and optimal action percentages
+### [Project 1: Tic-Tac-Toe](https://github.com/sonamansuryan/Reinforcement-Learningg/tree/main/tic-tac-toe)
+
+**Description:**  An RL agent that learns to play Tic-Tac-Toe through self-play using value-based learning.  
+**Based on:** [Section 1.1 – Tic-Tac-Toe](http://incompleteideas.net/book/RLbook2020.pdf#page=41)
 
 ---
 
-#### ✅ Project 3: Markov Decision Process (MDP) in Grid-World  
-**Description:** Implementation of a finite MDP in a grid-world environment.  
-**Highlights:**  
-- Custom reward structure with special states (A and B)  
-- Equiprobable random policy evaluation using Bellman Expectation Equation  
-- Visualization of state-value function under a fixed policy
+### [Project 2: 10-armed-testbed](https://github.com/ZhasminHovhannisyan/Reinforcement-Learning/tree/main/ten-armed-testbed)
+**Description:** Simulation of ε-greedy bandit strategies on a 10-armed testbed for evaluating exploration vs exploitation.  
+**Based on:** [Example 2.2 – Ten-Armed Testbed](http://incompleteideas.net/book/RLbook2020.pdf#page=65)
 
 ---
 
-#### ✅ Project 4: Dynamic Programming (DP) in Grid-World  
-**Focus:** Iterative policy evaluation, improvement, and policy iteration in a small grid-world setup.  
-**Key Components:**  
-- In-place and out-of-place value updates  
-- Equiprobable and greedy policies  
-- Demonstration of policy improvement and convergence  
-- Implementation of Bellman Expectation and Optimality Equations
+### [Project 3: Gridworld - mdp](https://github.com/sonamansuryan/Reinforcement-Learningg/tree/main/gridworld-mdp)
+**Description:** Markov Decision Process formalization and analysis of the Gridworld example.  
+**Based on:** [Chapter 3 – Finite Markov Decision Processes](http://incompleteideas.net/book/RLbook2020.pdf#page=91)
 
 ---
 
-#### ✅ Project 5: Gambler’s Problem – Value Iteration Approach  
-**Description:** Solving the Gambler’s Problem using value iteration in a finite MDP setup.  
-**Highlights:**  
-- Implementation of Value Iteration algorithm  
-- Exploration of how different stake choices affect the probability of reaching the goal  
-- Application of Bellman Optimality Equation  
-- Visualization of optimal policy and value function
+### [Project 4: Gridworld - dp](https://github.com/sonamansuryan/Reinforcement-Learningg/tree/main/gridworld-dpp)
+**Description:** Classical dynamic programming techniques (policy iteration and value iteration) applied to gridworld.  
+**Based on:** [Example 4.1 – Gridworld](http://incompleteideas.net/book/RLbook2020.pdf#page=113)
+
+---
+
+### [Project 5: Gambler - problem](https://github.com/sonamansuryan/Reinforcement-Learningg/tree/main/gambler-problem)
+**Description:** Dynamic programming solution to the gambler's ruin problem with policy evaluation and improvement.  
+**Based on:** [Example 4.3 – Gambler’s Problem](http://incompleteideas.net/book/RLbook2020.pdf#page=118)
+
+---
+
+### [Project 6: Blackjack - Monte Carlo Methods](https://github.com/sonamansuryan/Reinforcement-Learningg/tree/main/blackjack)
+
+**Description:** Monte Carlo prediction and control methods applied to the card game Blackjack.  
+**Based on:** [Example 5.1 – Blackjack](http://incompleteideas.net/book/RLbook2020.pdf#page=134)
+
+---
+
+### [Project 7: Infinite - variance](https://github.com/sonamansuryan/Reinforcement-Learningg/tree/main/infinite-variance)
+**Description:** Demonstrates the instability of importance sampling in off-policy Monte Carlo methods due to infinite variance.  
+Based on: [Section 5.4 – Off-policy Prediction](http://incompleteideas.net/book/RLbook2020.pdf#page=147)
+
+---
+
+### [Project 8: Random-walk`](https://github.com/sonamansuryan/Reinforcement-Learningg/tree/main/random-walk)
+
+**Description:** Temporal-Difference (TD) learning vs Monte Carlo prediction in a simple Random Walk environment.  
+**Based on:** [Example 6.2 – Random Walk](http://incompleteideas.net/book/RLbook2020.pdf#page=140)
+
+---
+
+### [Project 9: Windy-gridworld](https://github.com/sonamansuryan/Reinforcement-Learningg/tree/main/windy-gridworld)
+**Description:** Implementation of stochastic and deterministic policies in a windy gridworld using SARSA.  
+**Based on:** [Example 6.5 – Windy Gridworld](http://incompleteideas.net/book/RLbook2020.pdf#page=132)
+
+---
+
+### [Project 10: Cliff-walking`](https://github.com/sonamansuryan/Reinforcement-Learningg/tree/main/cliff-walking)
+**Description:** Comparison between SARSA and Q-learning in a gridworld environment with dangerous cliff states.  
+**Based on:** [Example 6.6 – Cliff Walking](http://incompleteideas.net/book/RLbook2020.pdf#page=145)
+
+
+---
+
+##  Reference
+
+* Sutton, R. S., & Barto, A. G. (2018). *Reinforcement Learning: An Introduction* (2nd ed.).  
+  🔗 [Read the full book (PDF)](http://incompleteideas.net/book/RLbook2020.pdf)
+
+---
+
+##  Educational Objective
+
+This repository is intended as a companion to theoretical learning, providing hands-on experience with classical reinforcement learning algorithms and concepts. Each project serves as a stepping stone toward mastering more advanced topics in AI and autonomous decision-making.
 
