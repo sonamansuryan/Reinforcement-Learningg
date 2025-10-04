@@ -1,5 +1,6 @@
 import numpy as np
 
+
 # region Hyper-parameters
 
 # Number of non-terminal states
@@ -433,35 +434,38 @@ def gradient_monte_carlo(value_function, step_size, states_distribution=None):
     # region Body
 
     # Start at the start state
-
+    state = start
 
     # Create states trajectory
-
+    trajectory = [state]
 
     # Assume discount factor: 𝛾 = 1 => return is just the same as the latest reward
+    reward = 0.0
 
-
-
+    # While episode is not over
+    while state not in terminal_states:
         # Get action
-
+        action = get_action()
 
         # Get the next state and reward
-
+        next_state, reward = step(state, action)
 
         # Append the next state to the states trajectory
-
+        trajectory.append(next_state)
 
         # Move to the next state
-
+        state = next_state
 
     # Gradient update for every state in states trajectory
-
+    for state in trajectory[:-1]:
         # calculate the update size
-
+        update_size = step_size * (reward - value_function.value(state))
 
         # update VF parameters
+        value_function.update(update_size, state)
 
-
+        if states_distribution is not None:
+            states_distribution[state] += 1
 
 
     # endregion Body
@@ -479,74 +483,76 @@ def semi_gradient_temporal_difference(value_function, steps_number, step_size):
     # region Body
 
     # Initial starting state
-
+    state = start
 
     # List to store states for an episode
-
+    states = [state]
 
     # List to store rewards for an episode
-
+    rewards = [0]
 
     # Track the time
-
+    time_step = 0
 
     # The length of this episode
+    episode_length = float("inf")
 
-
-
+    while True:
         # go to next time step
-
+        time_step += 1
 
         # if episode is not over
-
+        if time_step < episode_length:
             # choose an action randomly
-
+            action = get_action()
 
             # get the next state and reward
-
+            next_state, reward = step(state, action)
 
             # append the new state to the list
-
+            states.append(next_state)
 
             # append the reward to the list
-
+            rewards.append(reward)
 
             # if the next state is terminal state
-
+            if next_state in terminal_states:
                 # end the episode
-
+                episode_length = time_step
 
         # get the time of the state to update
+        update_time = time_step - steps_number
 
-
-
+        if update_time >= 0:
             # prepare to calculate returns
-
+            returns = 0.0
 
             # calculate corresponding rewards
-
+            for t in range(update_time + 1, min(episode_length, update_time + steps_number) + 1):
+                returns += rewards[t]
 
             # if episode is not over
-
+            if update_time + steps_number <= episode_length:
                 # add approximate state value to the return
-
+                returns += value_function.value(states[update_time + steps_number])
 
             # get the state to be updated
-
+            state_to_update = states[update_time]
 
             # if the state to be updated is not a terminal state
-
+            if not state_to_update in terminal_states:
                 # calculate the update size
-
+                update_size = step_size * (returns - value_function.value(state_to_update))
 
                 # update the VF
-
+                value_function.update(update_size, state_to_update)
 
         # check if episode ended
-
+        if update_time == episode_length - 1:
+            break
 
         # move to the next state
-
+        state = next_state
 
     # endregion Body
 

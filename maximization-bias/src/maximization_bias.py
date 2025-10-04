@@ -1,4 +1,5 @@
 import numpy as np
+from zmq.backend import first
 
 # region Hyper-parameters
 
@@ -96,69 +97,70 @@ def q_learning(first_action_value_estimates, second_action_value_estimates = Non
     # region Body
 
     # Initialize state at the start
+    state = start
 
 
     # Track the number of action "left" in state A
-
+    left_count = 0
 
     # Keep going until getting to the terminal state
-
+    while state != states['terminal']:
         # choose an action for classic Q-learning
-
+        if second_action_value_estimates is None:
+            action = choose_action(first_action_value_estimates, state)
 
         # choose an action for Double Q-learning
-
+        else:
             # for example, an 𝜀-greedy policy for Double Q-learning could be based on the average (or sum) of the 2 action-value estimates
-
+            action = choose_action([estimate1 + estimate2 for estimate1, estimate2 in zip(first_action_value_estimates, second_action_value_estimates)], state)
 
         # check if agent chose "left" action in state A
-
+        if state == states['A'] and action == actions_A["left"]:
+            left_count += 1
 
         # get the reward
-
+        reward = take_action(state, action)
 
         # get the next state
-
-
+        next_state = transition[state][action]
         # for classic Q-learning
-
+        if second_action_value_estimates is None:
             # set action-value estimate to update
-
+            update_estimate = first_action_value_estimates
 
             # set target
-
+            target = np.max(update_estimate[next_state])
 
         # for Double Q-learning, divide the time steps in 2, perhaps by flipping a coin on each step
-
+        else:
             # if the coin comes up heads
-
+            if np.random.binomial(n=1, p=0.5) == 1:
                 # set the estimate to update to 𝑄_1
-
+                update_estimate = first_action_value_estimates
 
                 # set the target estimate to 𝑄_2
-
+                target_estimate = second_action_value_estimates
 
             # if the coin comes up tails, then the same update is done with 𝑄_1 and 𝑄_2 switched, so that 𝑄_2 is updated
-
+            else:
                 # set the estimate to update to 𝑄_2
-
+                update_estimate = second_action_value_estimates
 
                 # set the target estimate to 𝑄_1
-
+                target_estimate = first_action_value_estimates
 
             # get the best action
-
-
+            best_action = np.random.choice([act for act , val in enumerate(update_estimate[next_state]) if val == np.max(update_estimate[next_state])])
             # get the target
-
+            target = target_estimate[next_state][best_action]
 
         # Q-learning update (Equation (6.8))
-
+        update_estimate[state][action] += step_size * (reward  + discount * target - update_estimate[state][action])
 
         # move to the next state
+        state = next_state
 
-
-
+    return left_count
 
     # endregion Body
 
