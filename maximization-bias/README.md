@@ -1,4 +1,4 @@
-# Maximization Bias — Q-learning vs Double Q-learning
+# Maximization Bias - Q-learning vs Double Q-learning
 
 This project empirically demonstrates the **maximization bias** phenomenon in **Temporal-Difference (TD) control** methods, comparing **Q-learning** and **Double Q-learning** on a small **Markov Decision Process (MDP)**, as illustrated in Sutton & Barto’s *Reinforcement Learning: An Introduction* (Chapter 6, Figure 6.5).
 
@@ -102,7 +102,7 @@ The **percentage of `left` actions from state A** is recorded for each method.
 
 * Sutton, R. S., & Barto, A. G. (2018). *Reinforcement Learning: An Introduction (2nd ed.)*
 
-  * [Chapter 6 – Maximization Bias](http://incompleteideas.net/book/RLbook2020.pdf#page=139) (see page 136)
+  * [Chapter 6 – Maximization Bias](http://incompleteideas.net/book/RLbook2020.pdf#page=139) (see page 134)
 
 ---
 
