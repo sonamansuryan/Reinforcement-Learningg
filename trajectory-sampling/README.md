@@ -70,7 +70,7 @@ Q(s,a) \gets (1 - p_{\text{term}}) \cdot \text{mean}(R(s,a,s') + \max_{a'} Q(s',
 
 ### Effect of Branching Factor on 1,000-State Tasks
 
-![figure\_8\_8\_1.png](book_images/Figure_8_8_1.png)
+![Figure_8_8_1.PNG](book_images/Figure_8_8_1.PNG)
 
 * On-policy sampling accelerates planning early, especially for **smaller branching factors**.
 * Uniform sampling provides slower initial gains but catches up in the long run.
@@ -80,7 +80,7 @@ Q(s,a) \gets (1 - p_{\text{term}}) \cdot \text{mean}(R(s,a,s') + \max_{a'} Q(s',
 
 ### Effect of Number of States on Branching Factor 1
 
-![figure\_8\_8\_2.png](book_images/Figure_8_8_2.png)
+![Figure_8_8_2.PNG](book_images/Figure_8_8_2.PNG)
 
 * For larger state spaces (10,000 states), **on-policy sampling retains its advantage for longer**.
 * Concentrating updates on relevant states yields **large and sustained performance improvements**.
