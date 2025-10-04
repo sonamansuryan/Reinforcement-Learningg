@@ -90,7 +90,8 @@ The **percentage of `left` actions from state A** is recorded for each method.
 
 ### Maximization Bias Plot (Reproduction of Figure 6.5)
 
-![figure\_6\_5.png](generated_images/figure_6_5.png)
+<img src="generated_images/figure_6_5.png" width="500"/>
+
 
 * **Q-learning** initially overestimates the value of `left` in state A, favoring it more than optimal.
 * **Double Q-learning** mitigates this bias, staying closer to the **optimal choice** (`right`) throughout.

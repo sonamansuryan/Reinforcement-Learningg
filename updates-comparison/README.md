@@ -95,7 +95,8 @@ For each trial:
 
 ### Estimation Error vs. Computation (Reproduction of Figure 8.7)
 
-![figure\_8\_7.png](generated_images/figure_8_7.png)
+<img src="generated_images/figure_8_7.png" width="500"/>
+
 
 Observations:
 
