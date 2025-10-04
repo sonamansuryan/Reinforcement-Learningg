@@ -98,7 +98,7 @@ plt.figure(figsize=(12, 16))
 # Plot mean value of start state under greedy policy
 ```
 
-![figure\_8\_8.png](generated_images/figure_8_8.png)
+![figure\_8\_8.png](generated_images/figure_8_8.png) (see page 174)
 
 Observations:
 
