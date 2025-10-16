@@ -5,6 +5,11 @@ This repository includes a collection of projects developed during the Reinforce
 
 ---
 
+### What is Reinforcement Learning?
+
+Reinforcement Learning (RL) studies how agents learn to make decisions by interacting with an environment. The agent chooses actions, observes the outcomes, and adapts its strategy to maximize cumulative reward. Unlike traditional supervised learning, RL relies on trial and error rather than labeled data. It is widely applied in robotics, games, and autonomous systems where sequential decision-making is crucial.
+
+---
 ## Projects
 
 
