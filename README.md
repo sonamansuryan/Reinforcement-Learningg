@@ -7,7 +7,6 @@ This repository includes a collection of projects developed during the Reinforce
 
 ## Projects
 
----
 
 ### [Project 1: Tic-Tac-Toe](https://github.com/sonamansuryan/Reinforcement-Learningg/tree/main/tic-tac-toe)
 
