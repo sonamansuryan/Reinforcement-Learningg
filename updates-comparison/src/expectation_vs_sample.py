@@ -1,4 +1,3 @@
-
 import numpy as np
 
 def calculate_errors(branching_factor):
