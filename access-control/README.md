@@ -45,13 +45,13 @@ Both are updated after every transition using **semi-gradient updates**.
 
 ### Update Rule
 
-[
+$$
 \begin{aligned}
-\delta_t &= R_{t+1} - \bar{R} + Q(S_{t+1}, A_{t+1}) - Q(S_t, A_t) \
-\bar{R} &\leftarrow \bar{R} + \beta , \delta_t \
-w &\leftarrow w + \alpha , \delta_t , \nabla_w Q(S_t, A_t)
+\delta_t &= R_{t+1} - \bar{R} + Q(S_{t+1}, A_{t+1}) - Q(S_t, A_t) \\
+\bar{R} &\leftarrow \bar{R} + \beta \, \delta_t \\
+w &\leftarrow w + \alpha \, \delta_t \, \nabla_w Q(S_t, A_t)
 \end{aligned}
-]
+$$
 
 ### Implementation Details
 
