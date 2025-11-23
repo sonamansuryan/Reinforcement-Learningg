@@ -1,4 +1,6 @@
+
 import numpy as np
+
 
 # region Hyper-parameters
 
@@ -135,8 +137,8 @@ def compute_RMSVE(weights):
 
     # region Body
 
-    # Calculate the error in each state, i.e., the square of the difference between the approximate VF 𝑣 ̂(𝑠,𝒘) and the true VF 𝑣_𝜋(𝑠). In this example:
-    # 1. 𝑣 ̂(𝑠,𝒘) = 𝒘^𝑇 ∙ 𝒙(𝑠),
+    # Calculate the error in each state, i.e., the square of the difference between the approximate VF 𝑣 ̂(𝑠,𝒘) and the true VF 𝑣_𝜋(𝑠). In this example:
+    # 1. 𝑣 ̂(𝑠,𝒘) = 𝒘^𝑇 ∙ 𝒙(𝑠),
     # 2. 𝑣_𝜋(𝑠) = 0.
     difference = np.power(np.dot(features, weights), 2)
 
@@ -208,7 +210,6 @@ def semi_gradient_off_policy_TD(state, weights, step_size):
 
     # region Body
 
-    # Select an action according to the behavior policy
     action = behavior_policy(state)
 
     # Get the next state
@@ -216,20 +217,20 @@ def semi_gradient_off_policy_TD(state, weights, step_size):
 
     # Calculate the importance sampling ratio (denoted as 𝜌) according to the Equation (11.1)
     if action == actions["dashed"]:
-        importance_sampling_ratio = 0.0
+        importance_sampling_raito = 0.0
     else:
-        importance_sampling_ratio = 1.0/behavior_solid_probability
+        importance_sampling_raito = 1.0 / behavior_solid_probability
 
-    # Calculate TD error (denoted as 𝛿) according to the Equation (11.3) for linear case, i.e., 𝑣 ̂(𝑠,𝒘) = 𝒘^𝑇 ∙ 𝒙(𝑠)
+    # Calculate TD error (denoted as 𝛿) according to the Equation (11.3) for linear case, i.e., 𝑣 ̂(𝑠,𝒘) = 𝒘^𝑇 ∙ 𝒙(𝑠)
     TD_error = reward + discount * np.dot(features[next_state, :], weights) - np.dot(features[state, :], weights)
 
     # Update weights according to the Equation (11.2). Derivatives happen to be the same matrix due to the linearity
-    weights += step_size * importance_sampling_ratio * TD_error * features[state, :]
+    weights += step_size * importance_sampling_raito * TD_error * features[state, :]
 
     return next_state
 
+    # endregion Body
 
-   # endregion Body
 
 def semi_gradient_DP(weights, step_size):
     # region Summary
@@ -287,24 +288,26 @@ def TDC(state, weights, LLS_solution, step_size_w, step_size_v):
     # region Body
 
     # Select an action according to the behavior policy
-
+    action = behavior_policy(state)
 
     # Get the next state
-
+    next_state = step(state, action)
 
     # Calculate the importance sampling ratio (denoted as 𝜌) according to the Equation (11.1)
-
-
-    # Calculate TD error (denoted as 𝛿) according to the Equation (11.3) for linear case, i.e., 𝑣 ̂(𝑠,𝒘) = 𝒘^𝑇 ∙ 𝒙(𝑠)
-
+    if action == actions["dashed"]:
+        importance_sampling_ratio = 0.0
+    else:
+        importance_sampling_ratio = 1.0 / behavior_solid_probability
+    # Calculate TD error (denoted as 𝛿) according to the Equation (11.3) for linear case, i.e., 𝑣 ̂(𝑠,𝒘) = 𝒘^𝑇 ∙ 𝒙(𝑠)
+    TD_error = reward + discount * np.dot(features[next_state, :], weights) - np.dot(features[state, :], weights)
 
     # Update weights according to the sampling equation on page 280
-
+    weights += step_size_w * importance_sampling_ratio * (TD_error * features[state, :] - discount * features[next_state, :] * np.dot(features[state, :], LLS_solution))
 
     # Update LLS solution according to the Least Mean Square (LMS) rule (equation on page 279, under the Equation (11.28))
+    LLS_solution += step_size_v * importance_sampling_ratio * (TD_error - np.dot(features[state, :], LLS_solution)) * features[state, :]
 
-
-
+    return next_state
 
     # endregion Body
 
@@ -322,25 +325,29 @@ def expected_TDC(weights, LLS_solution, step_size_w, step_size_v):
     # region Body
 
     # For every state
-
+    for state in states:
         # when computing expected update target, if next state is not lower state, importance sampling ratio will be 0,
         # so we can safely ignore this case and assume next state is always lower state
-
+        TD_error = reward + discount * np.dot(features[lower_state, :], weights) - np.dot(features[state, :], weights)
 
         # calculate the importance sampling ratio
-
+        importance_sampling_ratio = 1/behavior_solid_probability
 
         # under behavior policy, state distribution is uniform, so the probability for each state is 1.0 / len(states)
-
+        expected_update_w = (1.0 / len(states) * behavior_solid_probability * importance_sampling_ratio
+                                               * (TD_error * features[state, :] - discount * features[lower_state, :]
+                                               * np.dot(LLS_solution, features[state, :])))
 
         # update weights
-
+        weights += step_size_w * expected_update_w
 
         # calculate expected update for LLS solution
-
+        expected_update_v = (1.0 / len(states) * behavior_solid_probability * importance_sampling_ratio
+                                               * (TD_error - np.dot(LLS_solution, features[state, :]))
+                                               * features[state, :])
 
         # update LLS solution
-
+        LLS_solution += step_size_v * expected_update_v
 
     # endregion Body
 
@@ -362,30 +369,34 @@ def expected_emphatic_TD(weights, emphasis, step_size):
     # region Body
 
     # Initialize expected update to 0
-
+    expected_update = 0
 
     # Initialize expected next emphasis to 0.0
-
+    expected_next_emphasis = 0.0
 
     # For every state
-
+    for state in states:
         # calculate the importance sampling ratio (denoted as 𝜌)
-
+        if state == lower_state:
+            importance_sampling_ratio = 1.0 / behavior_solid_probability
+        else:
+            importance_sampling_ratio = 0
 
         # update emphasis (3rd equation on page 282)
-
+        next_emphasis = discount * importance_sampling_ratio * emphasis + interest
+        expected_next_emphasis += next_emphasis
 
         # when computing expected update target, if next state is not lower state, importance sampling ratio will be 0,
         # so we can safely ignore this case and assume next state is always lower state
-
+        TD_error = reward + discount * np.dot(features[lower_state, :], weights) - np.dot(features[state, :], weights)
 
         # calculate expected update
-
+        expected_update += 1.0 / len(states) * behavior_solid_probability * next_emphasis * 1 / behavior_solid_probability * TD_error * features[state, :]
 
     # update weights
+    weights += step_size * expected_update
 
-
-
+    return expected_next_emphasis / len(states)
 
     # endregion Body
 

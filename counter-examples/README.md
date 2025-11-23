@@ -1,11 +1,20 @@
 
-# Baird’s Counter examples
+
+# Baird’s Counterexamples – Off-policy TD, TDC, and Emphatic-TD
 
 ## Overview
 
-This notebook implements **Baird’s Counterexample**, following the example in **Sutton & Barto, *Reinforcement Learning: An Introduction* (2nd Edition), Chapter 11**.
+This project implements and experiments with **Baird’s Counterexample**, a classic example of divergence in **off-policy temporal-difference learning** with linear function approximation, as described in **Sutton & Barto, *Reinforcement Learning: An Introduction* (2nd Edition), Chapter 11**.
 
-The counterexample demonstrates a situation where **semi-gradient TD methods diverge**, even under linear function approximation, highlighting the instability of off-policy learning.
+The experiments cover:
+
+* **Semi-gradient off-policy TD(0)**
+* **Semi-gradient DP updates**
+* **TDC (Gradient-corrected TD)**
+* **Expected TDC**
+* **Expected Emphatic-TD**
+
+These implementations highlight instability in naive off-policy TD learning and demonstrate the convergence behavior of gradient-corrected and emphatic TD algorithms.
 
 ---
 
@@ -13,75 +22,101 @@ The counterexample demonstrates a situation where **semi-gradient TD methods div
 
 ### Task Description
 
-* There are **7 states**: 6 upper states and 1 lower state.
-* There are **2 actions**: dashed (upper states) and solid (lower state).
-* Transition dynamics:
+* A **7-state, 2-action MDP**:
 
-  * **Dashed action:** moves to one of the 6 upper states uniformly.
-  * **Solid action:** moves to the 7th (lower) state.
-* **Behavior policy (b):** dashed with probability 6/7, solid with probability 1/7 (producing a uniform next-state distribution for non-terminal states).
-* **Target policy (\pi):** always solid action (concentrated in lower state).
+  * **States 0–5:** upper states
+  * **State 6:** lower state
+
+* **Actions:**
+
+  * **Dashed:** transitions uniformly to one of the upper states (0–5)
+  * **Solid:** transitions to the lower state (6)
+
+* **Behavior policy:** selects **dashed** with probability 6/7 and **solid** with 1/7.
+
+* **Target policy:** always selects **solid**, concentrating the on-policy distribution on the lower state.
+
 * **Reward:** 0 for all transitions.
-* **Discount factor:** (\gamma = 0.99).
+
+* **Discount factor:** γ = 0.99
+
+### Linear Function Approximation
+
+* Each state has an **8-dimensional feature vector**.
+* Upper states: feature i = 2, last feature = 1
+* Lower state: pre-last feature = 1, last feature = 2
+* True value function: v_π(s) = 0, ∀s
+* Many solutions exist (d = 8 > |S| = 7)
 
 ---
 
-## Objective
+## Algorithms
 
-Evaluate **linear value function approximation** under off-policy and on-policy learning:
+### Semi-gradient Off-policy TD
 
-* Learn **weights (w)** to approximate state values: ( \hat{v}(s, w) = w^T x(s) )
-* Observe **divergence** of semi-gradient off-policy TD, despite seemingly favorable conditions (linearly independent features, more weights than non-terminal states, zero reward).
+* Updates weights using the **importance-sampled TD(0) rule**.
+* Even with small step sizes, the algorithm **diverges** (Figure 11.2, left).
 
----
+### Semi-gradient DP
 
-## Algorithm: Semi-gradient TD
+* Performs expected updates for all states simultaneously using the **semi-gradient DP target**.
+* Instability persists even without stochasticity (Figure 11.2, right).
 
-### Key Idea
+### TDC (Gradient-corrected TD)
 
-Weights are updated using the **semi-gradient TD(0)** rule:
+* Temporal-Difference with Gradient Correction (GTD(0)) stabilizes learning.
+* Reduces **RMS projected Bellman error (RMS-PBE)** but convergence of weights to true VF is slow (Figure 11.5).
 
-$$
-w \leftarrow w + \alpha , \delta_t , x(s_t), \quad
-\delta_t = R_{t+1} + \gamma \hat{v}(S_{t+1}, w) - \hat{v}(S_t, w)
-$$
+### Expected TDC
 
-The **DP variant** updates using expected TD targets across all states, still leading to divergence.
+* Synchronous expected update version of TDC.
+* Reduces RMS-PBE and RMS value error more predictably.
 
----
+### Expected Emphatic-TD
 
-## Implementation Details
-
-* **Linear function approximation** using feature vectors (x(s)) for each state.
-* **Behavior and target policies** implemented as separate functions.
-* Semi-gradient TD updates applied **step by step**, or **synchronously** for DP version.
-* **Weights tracking:** stored across all steps to visualize divergence.
+* Synchronous, variance-free expected update using emphasis weighting.
+* Eventually converges to the optimal solution, RMS-VE → 0 (Figure 11.6).
+* High variance makes direct simulation challenging, but expectation computation shows convergence.
 
 ---
 
 ## Experimental Parameters
 
-| Parameter              | Symbol | Value | Description                                    |
-| ---------------------- | ------ | ----- | ---------------------------------------------- |
-| Number of states       | —      | 7     | 6 upper + 1 lower                              |
-| Number of actions      | —      | 2     | dashed / solid                                 |
-| Discount factor        | γ      | 0.99  | Discount rate                                  |
-| Step-size              | α      | 0.01  | Learning rate for weights                      |
-| Initial weights        | —      | 1, 10 | 1 for upper state weights, 10 for lower weight |
-| Number of steps/sweeps | —      | 1000  | Steps for TD / sweeps for DP                   |
+| Parameter           | Symbol | Value                 | Description                                 |
+| ------------------- | ------ | --------------------- | ------------------------------------------- |
+| States              | S      | 7                     | Number of states                            |
+| Actions             | A      | 2                     | Dashed, Solid                               |
+| Feature vector size | d      | 8                     | Linear function approximation dimension     |
+| Discount factor     | γ      | 0.99                  | Future reward discounting                   |
+| Behavior policy     | —      | 6/7 dashed, 1/7 solid | Action selection probabilities              |
+| Steps / sweeps      | —      | 1000                  | Number of updates per experiment            |
+| Step sizes          | α, β   | 0.01–0.05             | Learning rates for weights and LLS solution |
+| Interest            | I      | 1                     | For Emphatic-TD                             |
 
 ---
 
 ## Results and Visualization
 
-The resulting plots reproduce **Figure 11.2** from Sutton & Barto:
+### Figure 11.2 – Semi-gradient TD Divergence
 
-1. **Semi-gradient off-policy TD** – weights diverge to infinity.
-2. **Semi-gradient DP** – expected updates still diverge.
-
-### Figure 11.2 – Weights Divergence
+* **Left:** Semi-gradient off-policy TD weights diverge
+* **Right:** Semi-gradient DP expected updates also diverge
 
 <img src="generated_images/figure_11_2.png" width="600"/>
+
+### Figure 11.5 – TDC Convergence
+
+* TDC reduces **RMS-PBE**, but individual weights are still far from optimal
+* Expected TDC shows smoother convergence
+
+<img src="generated_images/figure_11_5.png" width="600"/>
+
+### Figure 11.6 – Expected Emphatic-TD
+
+* RMS value error converges to zero
+* Algorithm is stable in expectation, despite high variance in sampling
+
+<img src="generated_images/figure_11_6.png" width="600"/>
 
 ---
 
@@ -89,30 +124,35 @@ The resulting plots reproduce **Figure 11.2** from Sutton & Barto:
 
 * **File:** `src/counter_example.py`
 
-  * Implements environment dynamics (`step`, `target_policy`, `behavior_policy`).
-  * Contains **semi-gradient TD**, **semi-gradient DP**, and **helper functions** (`compute_RMSVE`, `compute_RMSPBE`).
-  * Includes placeholder functions for **TDC** and **Expected Emphatic TD**.
+  * Implements Baird’s counterexample environment and feature vectors
+  * Includes **semi-gradient TD**, **semi-gradient DP**, **TDC / Expected TDC**, **Expected Emphatic-TD**
+  * Computes **RMS value error (RMS-VE)** and **RMS projected Bellman error (RMS-PBE)**
 
-* **Notebook:** `notebooks/bairds_counterexample.ipynb`
+* **Notebooks:**
 
-  * Runs experiments for semi-gradient TD and DP.
-  * Generates and saves plots to `generated_images/`.
+  * `notebooks/bairds_counterexample.ipynb` – Semi-gradient TD and DP experiments
+  * `notebooks/tdc_baird.ipynb` – TDC and expected TDC experiments
+  * `notebooks/emphatic_baird.ipynb` – Expected Emphatic-TD experiments
 
 ---
 
 ## File Structure
 
 ```
-├── Counter-examples/
+├── counter-examples/
 │   ├── book_images/
 │   │   ├── Figure_11_1.PNG
 │   │   ├── Figure_11_2.PNG
 │   │   ├── Figure_11_5.PNG
 │   │   └── Figure_11_6.PNG
 │   ├── generated_images/
-│   │   └── figure_11_2.png
+│   │   ├── figure_11_2.png
+│   │   ├── figure_11_5.png
+│   │   └── figure_11_6.png
 │   ├── notebooks/
-│   │   └── bairds_counterexample.ipynb
+│   │   ├── bairds_counterexample.ipynb
+│   │   ├── tdc_baird.ipynb
+│   │   └── emphatic_baird.ipynb
 │   ├── src/
 │   │   ├── __init__.py
 │   │   └── counter_example.py
@@ -123,9 +163,10 @@ The resulting plots reproduce **Figure 11.2** from Sutton & Barto:
 
 ## Results Summary
 
-* Semi-gradient TD **fails off-policy**, diverging even with linear approximation.
-* DP-style expected updates **do not prevent divergence**, confirming theoretical predictions.
-* The counterexample motivates **Gradient-TD and Emphatic-TD methods** for stable off-policy learning.
+* Semi-gradient off-policy TD is **unstable**, diverging for any positive step size.
+* Gradient-corrected methods (TDC / Expected TDC) **stabilize learning**, reduce RMS-PBE.
+* Expected Emphatic-TD **converges in expectation** to the optimal solution despite variance in practical experiments.
+* This project demonstrates key insights about **off-policy TD divergence**, **importance sampling**, and **emphatic weighting** in reinforcement learning.
 
 ---
 
@@ -133,4 +174,4 @@ The resulting plots reproduce **Figure 11.2** from Sutton & Barto:
 
 Sutton, R. S., & Barto, A. G. (2018). *Reinforcement Learning: An Introduction (2nd ed.)*
 
-* [Chapter 11 – Example: Baird’s Counterexample](http://incompleteideas.net/book/RLbook2020.pdf#page=273) (see page 261)
+* [Chapter 11 – Off-policy TD, Baird’s counterexample](http://incompleteideas.net/book/RLbook2020.pdf#page=252) (see page 260)
